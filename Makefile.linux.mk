@@ -88,6 +88,7 @@ build/$1-%/lib/pkgconfig/capstone.pc: build/$1-env-%.rc build/.capstone-submodul
 			*-mipsel)    capstone_archs="mips"    ;; \
 			*-mips64)    capstone_archs="mips64"    ;; \
 			*-mips64el)  capstone_archs="mips64"    ;; \
+			*-s390x)     capstone_archs="systemz"   ;; \
 		esac \
 		&& CFLAGS="$$$$CPPFLAGS $$$$CFLAGS -w" make -C capstone \
 			PREFIX=$$$$frida_prefix \

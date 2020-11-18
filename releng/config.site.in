@@ -91,6 +91,9 @@ case $frida_host_platform_arch in
   macos-arm64|macos-arm64e|ios-arm64|ios-arm64e)
     host_alias="aarch64-apple-darwin"
     ;;
+  s390x-linux)
+    host_alias="s390x-linux-gnu"
+    ;;
 esac
 
 if [ $frida_host_platform_arch != $frida_build_platform_arch ]; then
