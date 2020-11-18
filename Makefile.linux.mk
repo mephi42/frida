@@ -505,6 +505,7 @@ check-tools-linux-arm64: build/tmp_thin-linux-arm64/frida-tools-$(PYTHON_NAME)/.
 		gum-linux-arm gum-linux-armbe8 gum-linux-armhf gum-linux-arm64 \
 		gum-linux-mips gum-linux-mipsel \
 		gum-linux-mips64 gum-linux-mips64el \
+		gum-linux-s390x \
 		gum-android-x86 gum-android-x86_64 \
 		gum-android-arm gum-android-arm64 \
 		gum-qnx-arm gum-qnx-armeabi \
@@ -517,6 +518,7 @@ check-tools-linux-arm64: build/tmp_thin-linux-arm64/frida-tools-$(PYTHON_NAME)/.
 		core-linux-arm core-linux-armbe8 core-linux-armhf core-linux-arm64 \
 		core-linux-mips core-linux-mipsel \
 		core-linux-mips64 core-linux-mips64el \
+		core-linux-s390x \
 		core-android-x86 core-android-x86_64 \
 		core-android-arm core-android-arm64 \
 		core-qnx-arm core-qnx-armeabi \
