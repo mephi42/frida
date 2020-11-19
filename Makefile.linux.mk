@@ -115,6 +115,7 @@ gum-linux-mips: build/frida_thin-linux-mips/lib/pkgconfig/frida-gum-1.0.pc ##@gu
 gum-linux-mipsel: build/frida_thin-linux-mipsel/lib/pkgconfig/frida-gum-1.0.pc ##@gum Build for Linux/mipsel
 gum-linux-mips64: build/frida_thin-linux-mips64/lib/pkgconfig/frida-gum-1.0.pc ##@gum Build for Linux/mips64
 gum-linux-mips64el: build/frida_thin-linux-mips64el/lib/pkgconfig/frida-gum-1.0.pc ##@gum Build for Linux/MIP64Sel
+gum-linux-s390x: build/frida_thin-linux-s390x/lib/pkgconfig/frida-gum-1.0.pc ##@gum Build for Linux/s390x
 gum-android-x86: build/frida-android-x86/lib/pkgconfig/frida-gum-1.0.pc ##@gum Build for Android/x86
 gum-android-x86_64: build/frida-android-x86_64/lib/pkgconfig/frida-gum-1.0.pc ##@gum Build for Android/x86-64
 gum-android-arm: build/frida-android-arm/lib/pkgconfig/frida-gum-1.0.pc ##@gum Build for Android/arm
@@ -158,6 +159,8 @@ check-gum-linux-armhf: gum-linux-armhf ##@gum Run tests for Linux/armhf
 	build/tmp_thin-linux-armhf/frida-gum/tests/gum-tests $(test_args)
 check-gum-linux-arm64: gum-linux-arm64 ##@gum Run tests for Linux/arm64
 	build/tmp_thin-linux-arm64/frida-gum/tests/gum-tests $(test_args)
+check-gum-linux-s390x: gum-linux-arm64 ##@gum Run tests for Linux/s390x
+	build/tmp_thin-linux-s390x/frida-gum/tests/gum-tests $(test_args)
 
 
 core-linux-x86: build/frida-linux-x86/lib/pkgconfig/frida-core-1.0.pc ##@core Build for Linux/x86
@@ -172,6 +175,7 @@ core-linux-mips: build/frida_thin-linux-mips/lib/pkgconfig/frida-core-1.0.pc ##@
 core-linux-mipsel: build/frida_thin-linux-mipsel/lib/pkgconfig/frida-core-1.0.pc ##@core Build for Linux/mipsel
 core-linux-mips64: build/frida_thin-linux-mips64/lib/pkgconfig/frida-core-1.0.pc ##@core Build for Linux/mips64
 core-linux-mips64el: build/frida_thin-linux-mips64el/lib/pkgconfig/frida-core-1.0.pc ##@core Build for Linux/mips64el
+core-linux-s390x: build/frida_thin-linux-s390x/lib/pkgconfig/frida-core-1.0.pc ##@core Build for Linux/s390x
 core-android-x86: build/frida-android-x86/lib/pkgconfig/frida-core-1.0.pc ##@core Build for Android/x86
 core-android-x86_64: build/frida-android-x86_64/lib/pkgconfig/frida-core-1.0.pc ##@core Build for Android/x86-64
 core-android-arm: build/frida-android-arm/lib/pkgconfig/frida-core-1.0.pc ##@core Build for Android/arm
@@ -324,6 +328,8 @@ check-core-linux-armhf: core-linux-armhf ##@core Run tests for Linux/armhf
 	build/tmp_thin-linux-armhf/frida-core/tests/frida-tests $(test_args)
 check-core-linux-arm64: core-linux-arm64 ##@core Run tests for Linux/arm64
 	build/tmp_thin-linux-arm64/frida-core/tests/frida-tests $(test_args)
+check-core-linux-s390x: core-linux-s390x ##@core Run tests for Linux/s390x
+	build/tmp_thin-linux-s390x/frida-core/tests/frida-tests $(test_args)
 
 
 python-linux-x86: build/tmp-linux-x86/frida-$(PYTHON_NAME)/.frida-stamp ##@python Build Python bindings for Linux/x86
@@ -332,6 +338,7 @@ python-linux-x86-thin: build/tmp_thin-linux-x86/frida-$(PYTHON_NAME)/.frida-stam
 python-linux-x86_64-thin: build/tmp_thin-linux-x86_64/frida-$(PYTHON_NAME)/.frida-stamp ##@python Build Python bindings for Linux/x86-64 without cross-arch support
 python-linux-armhf: build/tmp_thin-linux-armhf/frida-$(PYTHON_NAME)/.frida-stamp ##@python Build Python bindings for Linux/armhf
 python-linux-arm64: build/tmp_thin-linux-arm64/frida-$(PYTHON_NAME)/.frida-stamp ##@python Build Python bindings for Linux/arm64
+python-linux-s390x: build/tmp_thin-linux-s390x/frida-$(PYTHON_NAME)/.frida-stamp ##@python Build Python bindings for Linux/s390x
 
 define make-python-rule
 build/$2-%/frida-$$(PYTHON_NAME)/.frida-stamp: build/.frida-python-submodule-stamp build/$1-%/lib/pkgconfig/frida-core-1.0.pc
@@ -375,6 +382,10 @@ check-python-linux-armhf: build/tmp_thin-linux-armhf/frida-$(PYTHON_NAME)/.frida
 		&& ${PYTHON} -m unittest discover
 check-python-linux-arm64: build/tmp_thin-linux-arm64/frida-$(PYTHON_NAME)/.frida-stamp ##@python Test Python bindings for Linux/arm64
 	export PYTHONPATH="$(shell pwd)/build/frida_thin-linux-arm64/lib/$(PYTHON_NAME)/site-packages" \
+		&& cd frida-python \
+		&& ${PYTHON} -m unittest discover
+check-python-linux-s390x: build/tmp_thin-linux-s390x/frida-$(PYTHON_NAME)/.frida-stamp ##@python Test Python bindings for Linux/s390x
+	export PYTHONPATH="$(shell pwd)/build/frida_thin-linux-s390x/lib/$(PYTHON_NAME)/site-packages" \
 		&& cd frida-python \
 		&& ${PYTHON} -m unittest discover
 
@@ -439,6 +450,7 @@ tools-linux-x86-thin: build/tmp_thin-linux-x86/frida-tools-$(PYTHON_NAME)/.frida
 tools-linux-x86_64-thin: build/tmp_thin-linux-x86_64/frida-tools-$(PYTHON_NAME)/.frida-stamp ##@tools Build CLI tools for Linux/x86-64 without cross-arch support
 tools-linux-armhf: build/tmp_thin-linux-armhf/frida-tools-$(PYTHON_NAME)/.frida-stamp ##@tools Build CLI tools for Linux/armhf
 tools-linux-arm64: build/tmp_thin-linux-arm64/frida-tools-$(PYTHON_NAME)/.frida-stamp ##@tools Build CLI tools for Linux/arm64
+tools-linux-s390x: build/tmp_thin-linux-s390x/frida-tools-$(PYTHON_NAME)/.frida-stamp ##@tools Build CLI tools for Linux/s390x
 
 define make-tools-rule
 build/$2-%/frida-tools-$$(PYTHON_NAME)/.frida-stamp: build/.frida-tools-submodule-stamp build/$2-%/frida-$$(PYTHON_NAME)/.frida-stamp
